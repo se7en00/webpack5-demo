@@ -1,29 +1,37 @@
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const paths = require('./paths')
-
+const {
+    paths,
+    entry,
+    output,
+    resolve,
+    eslintRules,
+    babelLoader
+} = require('./config')
 
 module.exports = {
     mode: 'production',
+     // Don't attempt to continue if there are any errors.
+    bail: true,
     devtool: 'source-map',
-    entry: [paths.src + '/index.tsx'],
-    output: {
-        path: paths.build,
-        filename: '[name].bundle.js',
-        publicPath: '/',
-    },
-    resolve: {
-        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
-    },
+    entry: entry(paths),
+    output: output(paths),
+    resolve: resolve(paths, { '@': paths.appSrc }),
     module: {
+        strictExportPresence: true,
         rules: [
-          { test: /\.(tsx|ts)$/, use: ['babel-loader'] }
+            eslintRules(paths),
+            {
+                oneOf: [
+                    babelLoader(paths),
+                ]
+            }
         ],
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: 'webpack Boilerplate',
-            template: paths.public + '/index.html'
+            template: paths.appHtml
         }),
     ]
 }

@@ -1,4 +1,4 @@
-import React, {  memo } from "react"
+import React, { memo } from "react"
 
 /*
  * @Date: 2021-01-21 17:28:07

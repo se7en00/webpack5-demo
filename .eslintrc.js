@@ -113,5 +113,6 @@ module.exports = {
         //关闭方法必须要返回类型
         "@typescript-eslint/explicit-function-return-type": 0,
         "react/prop-types": "off",
+        "react/display-name": "off",
     }
 }
