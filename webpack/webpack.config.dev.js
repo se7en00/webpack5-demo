@@ -24,6 +24,10 @@ module.exports = {
     entry: entry(paths),
     output: output(paths),
     resolve: resolve(paths, { '@': paths.appSrc }),
+    externals: {
+        react: 'React',
+        "react-dom": "ReactDOM"
+    },
     module: {
         strictExportPresence: true,
         rules: [
